@@ -141,6 +141,18 @@ Torres = player("Fernando","Torres",spain)
 Ronaldo = player("Christiano","Ronaldo",portugal) ##created player instances
 
 
+
+
+
+
+#torres_score = [0,0,1,0,1]
+#for i in torres_score:
+ #    Torres.add_score(date.today(),i)
+#print Torres.total_score()##total goals for torres_score
+
+
+#print Torres.average_score()
+
 spain.add_player(Torres)
 portugal.add_player(Ronaldo)
 #print portugal
@@ -181,14 +193,19 @@ class Match:
         print A,H
     def add_score(self,player,score):
         
-        team = player.team.team_name  
+        team = player.team.team_name  ####come back here soon
         if team == self.home_team:
+            #print "true",player.team.team_name
+            
             self.home_scores[player.last_name] = score
             print self.home_scores
             for player in self.home_scores:
-                self.Home_P_score.append(score) 
+                self.Home_P_score.append(score)#self.home_scores[player]) 
             print sum(self.Home_P_score)##prints total goals scored in home team
             
+            #print self.home_scores[self.player.last_name]
+            #print self.player.last_name
+            #print self.home_scores[player]###prints the player's current score
             return sum(self.Home_P_score)
         elif team == self.away_team:
             #print self.away_team
@@ -227,6 +244,17 @@ print euro_semi_final.winner()
 
 
 
-
+'''team = "Espanyol"
+if team == spain.team_name:
+    print "true"
+    print
+    print Torres.team.team_name
+    
+else:
+    print "false"
+    print spain.team_name
+    print
+    print Torres.team.team_name
+       '''
         
 

@@ -88,7 +88,6 @@ def highest_scorer(player_stats):
     return
 highest_scorer(player_stats)
 '''
-##PART II
 import datetime
 from datetime import date
 class player:
@@ -112,8 +111,6 @@ class player:
     def average_score(self):
         avg_score=sum(self.scores)/float(len(self.scores))
         return avg_score
-    
-
 
 class team :
         def __init__(self,t_name,t_league,t_mgr_name,t_pts,):
@@ -132,19 +129,27 @@ class team :
         def add_player(self,player):
             self.players.append(player)
             return
-
-
 portugal = team('Portugal','Euro','Del Rossi',9,)
-spain    = team('Espanyol','Euro','Del Rossi',10,)##created team instances
+spain    = team('Espanyol','Euro','Del Rossi',10,)
 
 Torres = player("Fernando","Torres",spain)
-Ronaldo = player("Christiano","Ronaldo",portugal) ##created player instances
+Ronaldo = player("Christiano","Ronaldo",spain)
 
+Torres = player("Fernando","Torres",spain)
+
+torres_score = [0,0,1,0,1]
+for i in torres_score:
+     Torres.add_score(date.today(),i)
+print Torres.total_score()##total goals for torres_score
+
+
+#print Torres.average_score()
+my_player = player("rooney","Manu","manchester-U")
 
 spain.add_player(Torres)
 portugal.add_player(Ronaldo)
-#print portugal
-#print spain
+print portugal
+print spain
 class Match:
     def __init__(self,home,away,date):
         self.home_team = home
@@ -152,74 +157,60 @@ class Match:
         datetime.date = date
         self.home_scores = {}
         self.away_scores = {}
-        self.Away_P_score=[]
-        self.Home_P_score=[]
     def home_score(self):
-        if len(self.Home_P_score) == 0:
+        H_score=0
+        for P_name in self.home_scores:
+            H_score += self.home_scores[P_name]
+        if H_score == 0:
             return 0
         else:
-            return sum(self.Home_P_score)
+            return H_score
 
 
     def away_score(self):
-        if len(self.Away_P_score) == 0:
+        A_score=0
+        for P_name in self.away_scores:
+            A_score += self.away_scores[P_name]
+        print A_score
+        if A_score == 0:
             return 0
         else:
-            return sum(self.Away_P_score)
+            return A_score
     def winner(self):
         H=self.home_score()
         A=self.away_score()
         if H>A:
-            print "Winner of the game played on "+str(datetime.date)+"was\n"+self.home_team+ " with " +str(H)+"goals"
+            print "Winner of the game played on "+str(date.today())+"was\n"+self.home_team+ " with " +str(H)+"goals"
             return 
-        elif H<A:
-            print "Winner of the game played on "+str(datetime.date)+" was\n" + self.away_team + " with "  + str(A)+" goal(s)"
+        elif A > H:
+            print "Winner of the game played on "+str(date.today())+" was\n" + self.away_team + " with "  + str(A)+" goal(s)"
             return 
         else:
             print "the game ended in a draw"
             return 
-        print A,H
+        #print A,H
     def add_score(self,player,score):
-        
-        team = player.team.team_name  
+        team= player.team.team_name  ####come back here soon
         if team == self.home_team:
-            self.home_scores[player.last_name] = score
-            print self.home_scores
-            for player in self.home_scores:
-                self.Home_P_score.append(score) 
-            print sum(self.Home_P_score)##prints total goals scored in home team
+            P_score=0
+            self.home_scores = {player.last_name:score+P_score}
+           # print str(self.home_scores)
             
-            return sum(self.Home_P_score)
-        elif team == self.away_team:
-            #print self.away_team
-            self.away_scores[player.last_name] = score
-            for away_player in self.away_scores:
-                self.Away_P_score.append(score)#self.away_scores[player.last_name])
-            return #sum(self.Away_P_score)
 
         else:
-            self.away_scores[player.last_name] = score
-            for away_player in self.away_scores:
-                self.Home_P_score.append(self.home_scores[player.last_name])#add goal to dictionary
-            print "false",player.team.team_name
-            
-            return #sum(self.Home_P_score)
+            self.away_scores = {player.last_name:score}
        
        
-euro_semi_final = Match('Espanyol','Portugal',str(datetime.date(2012,6,27)))
-euro_semi_final.add_score(Torres,1)
-euro_semi_final.add_score(Ronaldo,1)
-euro_semi_final.add_score(Ronaldo,1)
-euro_semi_final.add_score(Ronaldo,1)
-euro_semi_final.add_score(Ronaldo,1)
-euro_semi_final.add_score(Torres,1)
+euro_semi_final = Match('spain','portugal',date.today())
+euro_semi_final.add_score(Torres,2)
+euro_semi_final.add_score(Ronaldo,4)
 euro_semi_final.add_score(Torres,1)
 print euro_semi_final.winner()
 
 
 
 
-#print spain.team_name
+print spain.team_name
 
 
 
@@ -227,6 +218,17 @@ print euro_semi_final.winner()
 
 
 
-
+'''team = "Espanyol"
+if team == spain.team_name:
+    print "true"
+    print
+    print Torres.team.team_name
+    
+else:
+    print "false"
+    print spain.team_name
+    print
+    print Torres.team.team_name
+       '''
         
 
